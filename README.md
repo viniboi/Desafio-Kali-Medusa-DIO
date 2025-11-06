@@ -22,9 +22,9 @@ Opcional: Se for usar o DVWA separadamente (além do Metasploitable 2 que já o 
 
 - Importe/Crie a VM do Metasploitable 2 (usando o arquivo .vmdk).
 
-.Se nao conseguil colocar ou instalar o metasploitable 2 segue o link de um guia na propria plataforma da @DIO (https://www.dio.me/articles/tutorial-metasploit-2-na-virtualbox-santander-ciberseguranca-2025-fb85402b3224)
+.Se nao conseguiu colocar ou instalar o metasploitable 2 segue o link de um guia na propria plataforma da @DIO (https://www.dio.me/articles/tutorial-metasploit-2-na-virtualbox-santander-ciberseguranca-2025-fb85402b3224)
 
-.Se nao conseguil colocar ou instar o Kali Linux segue o link de um guia na propria platadorma da @DIO (https://web.dio.me/articles/guia-de-como-baixar-e-configurar-o-kali-linux-na-virtualbox-e596a0d110d6?back=/articles)
+.Se nao conseguiu colocar ou instar o Kali Linux segue o link de um guia na propria platadorma da @DIO (https://web.dio.me/articles/guia-de-como-baixar-e-configurar-o-kali-linux-na-virtualbox-e596a0d110d6?back=/articles)
 
 ### 3 Configuração da Rede (Host-Only)
 
@@ -38,9 +38,9 @@ Opcional: Se for usar o DVWA separadamente (além do Metasploitable 2 que já o 
 
 ### 1 Enumeração de Serviços (Nmap)
 
-- No Kali, para verificao do ip use o comando: **`ip a`** e para saber aonde esta o seu ip da uma olhada nas imagens
+- No Kali, para verifição do ip use o comando: **`ip a`** e para saber aonde esta o seu ip da uma olhada nas imagens
 
-- No Kali, use o Nmap para verificar quais portas e serviços estão abertos no IP do Metasploitable 2 usando  **`nmap -sV -p 21,22,80,445,139 [faixa_de_IP_da_rede]`** uma explicação rapida sobre os comando usados no code: -p basicamente ele vai escanear as portas que foi colocado / -sV ele tenta indentificar qual a versão esta rodando em cada porta
+- No Kali, use o Nmap para verificar quais portas e serviços estão abertos no IP do Metasploitable 2 usando  **`nmap -sV -p 21,22,80,445,139 [faixa_de_IP_da_rede]`** uma explicação rápida sobre os comandos usados no code: -p basicamente ele vai escanear as portas que foi colocado / -sV ele tenta indentificar qual a versão esta rodando em cada porta
 
 ### 2 Criação de Wordlists
 
@@ -72,7 +72,7 @@ Opcional: Se for usar o DVWA separadamente (além do Metasploitable 2 que já o 
 
 - Para entrar na Aplicação Web deve abrir um navegador e digitar na barra url: **`[IP_Metasploitable]/dvwa/login.php**`
 
-- Curiosidade: vc abre o modo desenvolvedor que para cada pessoa muda Fn+f12 ou f12 se nao for nenhum dos dois clique com o botao direito na pagina e selecione o desenvolvedor, com um tipo de janela subindo na sua tela e indo na aba network e tente logar com qualquer usuario e senha que vai mostrar o login failed e pelo request na aba de network vc consegue ver o username: e o password: que foi usado.
+- Curiosidade: você abre o modo desenvolvedor que para cada pessoa muda Fn+f12 ou f12 se nao for nenhum dos dois clique com o botao direito na pagina e selecione o desenvolvedor, com um tipo de janela subindo na sua tela e indo na aba network e tente logar com qualquer usuario e senha que vai mostrar o login failed e pelo request na aba de network vc consegue ver o username: e o password: que foi usado.
 
 - Agora usando a Força bruta com o medusa voce vai digitar esse comando aqui:
 ```sh
@@ -81,7 +81,7 @@ medusa -h [IP_Metasploitable] U users.txt -P password.txt -M http\
 - FORM: 'username=^USER^&password=^PASS^&Login Login' \
 -m 'FAIL-Login failed' -t 6
 ```
-- O codigo é grande entao descrevi oque cada comando faz:
+- O codigo é grande entao descrevi o que cada comando faz:
 
 medusa: O nome da ferramenta, um brute-forcer de login rápido, modular e paralelo.
 
