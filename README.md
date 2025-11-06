@@ -68,9 +68,9 @@ Opcional: Se for usar o DVWA separadamente (além do Metasploitable 2 que já o 
 
 - Valide o acesso usando uma ferramenta SMB (como smbclient) com as credenciais descobertas.
 
-## 🐍 Força Bruta em Aplicação Web (DVWA) e Mitigação
+## 🐍 Força Bruta em Aplicação Web (DVWA)
 
-- Para entrar na Aplicação Web deve abrir um navegador e digitar na barra url: **`[IP_Metasploitable]/dvwa/login.php**`
+- Para entrar na Aplicação Web deve abrir um navegador e digitar na barra url: **`[IP_Metasploitable]/dvwa/login.php`**
 
 - Curiosidade: você abre o modo desenvolvedor que para cada pessoa muda Fn+f12 ou f12 se nao for nenhum dos dois clique com o botao direito na pagina e selecione o desenvolvedor, com um tipo de janela subindo na sua tela e indo na aba network e tente logar com qualquer usuario e senha que vai mostrar o login failed e pelo request na aba de network vc consegue ver o username: e o password: que foi usado.
 
@@ -99,4 +99,42 @@ medusa: O nome da ferramenta, um brute-forcer de login rápido, modular e parale
 
 -m 'FAIL=Falha no login': Especifica a string que indica uma tentativa de login falha. A ferramenta procurará esse texto na resposta do servidor para determinar se as credenciais estavam incorretas.
 
--t 6: Define o número total de tentativas de login a serem testadas simultaneamente (o número de threads).
+-t 6: Define o número total de tentativas de login a serem testadas simultaneamente (o número de threads)
+
+## 🛡️ Medidas de Mitigação contra Ataques de Força Bruta
+
+### Prevenção para Serviço FTP (File Transfer Protocol)
+- Bloqueio e Limitação de Taxa:	Use ferramentas como **`fail2ban`** ou configurações do firewall **`(iptables)`** para monitorar os logs de login (erros de senha). Se um IP tentar acessar a conta várias vezes seguidas (ex: 5 tentativas em 5 minutos), ele deve ser bloqueado temporariamente ou permanentemente.
+- Uso de Senhas Fortes:	Implemente políticas de senha obrigatórias. Exija senhas longas (mínimo de 12-16 caracteres), complexas (mistura de maiúsculas, minúsculas, números e símbolos) e únicas.
+- Desativação de FTP Anônimo	Se não for estritamente necessário, desabilite o acesso de usuários anônimos, pois isso fornece um alvo fácil para testar credenciais.Troca para SFTP/FTPS	Evite o FTP "clássico" (que transmite credenciais em texto puro). Migre para SFTP (via SSH) ou FTPS (FTP sobre SSL/TLS), que criptografam a comunicação, dificultando a interceptação (sniffing) de credenciais válidas.
+- Autenticação Baseada em Chave	Para SFTP, sempre que possível, utilize a autenticação baseada em chaves SSH em vez de senhas, tornando a força bruta ineficaz.
+
+### Prevenção para Serviço SMB (Server Message Block)
+- Auditoria e Monitoramento: (Fail2ban)	Assim como no FTP, configure o fail2ban ou outras ferramentas de auditoria (como Security Onion ou ELK Stack) para analisar logs de tentativas de login SMB e bloquear IPs maliciosos após um número definido de falhas.
+- Restrição de Acesso por Rede: (Firewall)	Utilize o firewall do sistema operacional ou da rede para limitar o acesso à porta SMB (445/139) apenas a IPs confiáveis, sub-redes internas específicas ou VPNs. O SMB nunca deve estar diretamente exposto à internet.
+- Política de Bloqueio de Conta:	Configure a política de segurança do domínio/sistema operacional para bloquear temporariamente a conta após um número pequeno de falhas de login (ex: 3 a 5 tentativas).
+- Desativação de Contas Inativas/Padrão: Desative ou remova qualquer conta de usuário que não esteja em uso. No caso do Metasploitable 2, as credenciais padrão (como msfadmin ou user) devem ser alteradas imediatamente ou desativadas.
+- Enumeração de Usuários:	Aplique patches e configurações para impedir a enumeração de usuários (o processo de descobrir nomes de usuários válidos), o que é frequentemente um primeiro passo para o ataque de força bruta.
+
+### Prevenção para Aplicações Web (DVWA - Formulários de Login)
+- Limitação de Taxa (Rate Limiting):	Configure o Web Application Firewall (WAF) ou a aplicação para limitar o número de tentativas de login por segundo/minuto por endereço IP. Isso torna a força bruta inviável (ou muito lenta).
+- CAPTCHA e ReCAPTCHA:	Implemente CAPTCHAs que sejam difíceis de serem resolvidos por bots após um número pequeno de falhas de login. Isso adiciona um "teste humano" que as ferramentas de força bruta não conseguem passar facilmente.
+- Bloqueio de IP Temporário:	Após N tentativas de login fracassadas, bloqueie temporariamente o IP de origem (similar ao fail2ban).
+- Armazenamento Seguro de Senhas (Hashing e Salting):	O lado do servidor NUNCA deve armazenar senhas em texto simples. Use algoritmos de hashing lentos (como Argon2 ou bcrypt) e adicione um salt (valor aleatório único) a cada senha para dificultar ataques de tabela rainbow.
+- Autenticação de Múltiplos Fatores (MFA):	Implemente o MFA (2FA). Mesmo que a senha seja descoberta, o invasor ainda precisará de um segundo fator (código no celular, chave física, etc.).
+
+## 🤓 Conclusões/Aprendizados
+O desenvolvimento deste projeto prático, focado na simulação de ataques de Força Bruta em um ambiente controlado, foi fundamental para consolidar o entendimento sobre as vulnerabilidades críticas de autenticação e as práticas de defesa essenciais.
+
+- Compreensão de Ataques de Força Bruta: a execução dos testes contra os protocolos FTP, SMB e aplicações Web (DVWA) me mostrou de forma pratica que nao precisa de muito para tentar invadir e que muitos estao sem a devida segurança que necessitava nos sites ou servidores.
+
+- Domínio de Ferramentas de Auditoria: a ferramenta kali linux foi algo enssencial para esse projeto que mostrou que nao so o medusa como muitas outras ferramentas dentro dele fazem o caos dentro de sistemas sem segurança devida.
+
+- Valor da Documentação Técnica: as instruções tecnicas tecnicas por exemplo o host-only deixa claro que as informações tecnicas sao indispensaveis pra fazer um belíssimo trabalho, o github se provou uma ferramenta incrivel para devs/programadores para publicar os seus projetos.
+
+- Conscientização sobre Vulnerabilidades e Mitigação: a troca dos testes para a mitigação foi o ponto alto do aprendizado, ficou muito evidente que falhas (como a falta de Rate Limiting em um formulário de login ou o uso de credenciais padrão no Metasploitable 2) criam ataques faceis e automatizados por ferramentas gratuitas e faceis de se usar e mostram que segurança nao e um bonus e enssencia para todos.
+
+Reflexão Final
+Este desafio não apenas confirmou a teoria aprendida em aula mas também forneceu a experiência prática de configurar, atacar e defender um ambiente. A principal lição é que a segurança de um sistema é tão forte quanto seu ponto de autenticação mais fraco. Como iniciante profissional de segurança, é vital manter a mentalidade de um atacante (para encontrar falhas) e simultaneamente, de um defensor (para implementar as proteções robustas detalhadas na seção de Mitigação), foi incrivel assistir essa aula e ter feito o projeto, olhei bastante projetos publicos entendo como deixava mais profissonal os temas foi separado com a Ia (inteligecia artificial) do google o gemini a qual estou aprendendo como funciona em outro bootcamp.
+
+##Espero que tenham conseguido entender o tema e tambem pra quem tentou replicar os passos ter conseguido o acesso ao ftp,smb e dvwa.
