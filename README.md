@@ -38,9 +38,17 @@ Opcional: Se for usar o DVWA separadamente (além do Metasploitable 2 que já o 
 
 ### 1 Enumeração de Serviços (Nmap)
 
-- No Kali, para verifição do ip use o comando: **`ip a`** e para saber aonde esta o seu ip da uma olhada nas imagens
+- No Kali, para verifição do ip use o comando: **`ip a`** e para saber aonde esta o seu ip da uma olhada na imagen
+
+| ip a |
+|--------|
+| <img width="300" height="200" alt="Image" src="https://github.com/user-attachments/assets/38cb10a0-97da-4a10-bb56-105801980b34" /> | 
 
 - No Kali, use o Nmap para verificar quais portas e serviços estão abertos no IP do Metasploitable 2 usando  **`nmap -sV -p 21,22,80,445,139 [faixa_de_IP_da_rede]`** uma explicação rápida sobre os comandos usados no code: -p basicamente ele vai escanear as portas que foi colocado / -sV ele tenta indentificar qual a versão esta rodando em cada porta
+
+| ping |
+|--------|
+| <img width="300" height="200" alt="Image" src="https://github.com/user-attachments/assets/a9118aca-8a8a-428d-b4d2-f544fff2068e" />
 
 ### 2 Criação de Wordlists
 
@@ -52,9 +60,17 @@ Opcional: Se for usar o DVWA separadamente (além do Metasploitable 2 que já o 
 
 - Comando Exemplo: **`medusa -H [IP_Metasploitable] -u [CAMINHO_WORDLIST_USUARIOS] -P [CAMINHO_WORDLIST_SENHAS] -M ftp -t 6 `** (Ou -U [USUARIO_ALVO] -P [CAMINHO_WORDLIST_SENHAS] -M ftp -t 6) o -t 6 é para usar mais treads para um resultado mais rapido
 
+| medusa |
+|--------|
+| <img width="300" height="200" alt="Image" src="https://github.com/user-attachments/assets/afe5a8fa-a424-44a0-8adf-880d16f177ae" /> | 
+
 - Capture a tela do comando Medusa em execução e o resultado de sucesso (credenciais encontradas).
 
 - Valide o acesso usando o cliente FTP com as credenciais descobertas com o comando **`ftb [IP_Metasploitable]**`**
+
+| fpt login |
+|--------|
+| <img width="300" height="200" alt="Image" src="https://github.com/user-attachments/assets/dea573ef-5092-481b-a148-4509fd8ef220" /> | 
   
 ### 4 Ataque de Força Bruta/Password Spraying em SMB (Medusa):
 
@@ -72,7 +88,15 @@ Opcional: Se for usar o DVWA separadamente (além do Metasploitable 2 que já o 
 
 - Para entrar na Aplicação Web deve abrir um navegador e digitar na barra url: **`[IP_Metasploitable]/dvwa/login.php`**
 
+| dvwa |
+|--------|
+| <img width="300" height="200" alt="Image" src="https://github.com/user-attachments/assets/ae9a9ed7-cecd-4055-87a8-c19f49c26acc" /> | 
+
 - Curiosidade: você abre o modo desenvolvedor que para cada pessoa muda Fn+f12 ou f12 se nao for nenhum dos dois clique com o botao direito na pagina e selecione o desenvolvedor, com um tipo de janela subindo na sua tela e indo na aba network e tente logar com qualquer usuario e senha que vai mostrar o login failed e pelo request na aba de network vc consegue ver o username: e o password: que foi usado.
+
+| desenvolvedor |
+|--------|
+| <img width="100" height="100" alt="Image" src="https://github.com/user-attachments/assets/bbb6d831-2559-4aa4-9b4f-0bde6d60c1cf" /> | 
 
 - Agora usando a Força bruta com o medusa voce vai digitar esse comando aqui:
 ```sh
@@ -100,6 +124,11 @@ medusa: O nome da ferramenta, um brute-forcer de login rápido, modular e parale
 -m 'FAIL=Falha no login': Especifica a string que indica uma tentativa de login falha. A ferramenta procurará esse texto na resposta do servidor para determinar se as credenciais estavam incorretas.
 
 -t 6: Define o número total de tentativas de login a serem testadas simultaneamente (o número de threads)
+
+| comando/resultado |
+|--------|
+| <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/2ad32af0-2744-4c6f-a2a9-e5e8a5a75ad9" /> |
+| <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/14d3a9e0-f8a0-452e-907d-2ef90086c0fc" /> 
 
 ## 🛡️ Medidas de Mitigação contra Ataques de Força Bruta
 
