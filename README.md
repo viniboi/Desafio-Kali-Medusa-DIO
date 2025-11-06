@@ -134,7 +134,8 @@ O desenvolvimento deste projeto prático, focado na simulação de ataques de Fo
 
 - Conscientização sobre Vulnerabilidades e Mitigação: a troca dos testes para a mitigação foi o ponto alto do aprendizado, ficou muito evidente que falhas (como a falta de Rate Limiting em um formulário de login ou o uso de credenciais padrão no Metasploitable 2) criam ataques faceis e automatizados por ferramentas gratuitas e faceis de se usar e mostram que segurança nao e um bonus e enssencia para todos.
 
-Reflexão Final
-Este desafio não apenas confirmou a teoria aprendida em aula mas também forneceu a experiência prática de configurar, atacar e defender um ambiente. A principal lição é que a segurança de um sistema é tão forte quanto seu ponto de autenticação mais fraco. Como iniciante profissional de segurança, é vital manter a mentalidade de um atacante (para encontrar falhas) e simultaneamente, de um defensor (para implementar as proteções robustas detalhadas na seção de Mitigação), foi incrivel assistir essa aula e ter feito o projeto, olhei bastante projetos publicos entendo como deixava mais profissonal os temas foi separado com a Ia (inteligecia artificial) do google o gemini a qual estou aprendendo como funciona em outro bootcamp.
+### Reflexão Final
 
-##Espero que tenham conseguido entender o tema e tambem pra quem tentou replicar os passos ter conseguido o acesso ao ftp,smb e dvwa.
+Este desafio não apenas confirmou a teoria aprendida em aula mas também forneceu a experiência prática de configurar, atacar e defender um ambiente. A principal lição é que a segurança de um sistema é tão forte quanto seu ponto de autenticação mais fraco. Como iniciante profissional de segurança, é vital manter a mentalidade de um atacante (para encontrar falhas) e simultaneamente, de um defensor (para implementar as proteções robustas detalhadas na seção de Mitigação), foi incrivel assistir essa aula e ter feito o projeto, olhei bastante projetos publicos entendo como deixava mais profissonal, com a Ia (inteligecia artificial) do google o gemini a qual estou aprendendo como funciona em outro bootcamp.
+
+## Espero que tenham conseguido entender o tema e tambem pra quem tentou replicar os passos ter conseguido o acesso ao ftp,smb e dvwa.
