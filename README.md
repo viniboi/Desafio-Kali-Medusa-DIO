@@ -66,7 +66,7 @@ Opcional: Se for usar o DVWA separadamente (além do Metasploitable 2 que já o 
 
 - Capture a tela do comando Medusa em execução e o resultado de sucesso.
 
-- Valide o acesso usando uma ferramenta SMB (como smbclient) com as credenciais descobertas.
+- Valide o acesso usando uma ferramenta SMB com as credenciais descobertas com o comando **`smbclient [IP_Metasploitable]`**
 
 ## 🐍 Força Bruta em Aplicação Web (DVWA)
 
