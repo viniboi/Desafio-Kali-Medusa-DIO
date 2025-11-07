@@ -2,6 +2,8 @@ Desafio-Kali-Medusa-DIO
 
 Esse é um projeto pratico que a @DIO pede no seu bootcamp Santander - Cibersegurança 2025 na aula (Simulando um Ataque de Brute Force de Senhas com Medusa e Kali Linux) que no final pede para Implementar, documentar e compartilhar um projeto prático utilizando Kali Linux e a ferramenta Medusa, em conjunto com ambientes vulneráveis (por exemplo, Metasploitable 2 e DVWA), para simular cenários de ataque de força bruta e exercitar medidas de prevenção.
 
+## ⚠️ AVISO IMPORTANTE: Este projeto foi desenvolvido exclusivamente para fins educacionais e de estudo sobre segurança da informação. O uso indevido deste código para atividades maliciosas é ilegal e de total responsabilidade do usuário.
+
 ---
 
 ## ⚙️ Configuração do Ambiente
